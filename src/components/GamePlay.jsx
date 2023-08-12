@@ -4,12 +4,14 @@ import NumberSelector from './NumberSelector'
 import { styled } from 'styled-components'
 import RoleDice from './RoleDice'
 import { Button, OutlineButton } from '../styled/Button'
+import Rules from './Rules'
 
 const GamePlay = () => {
   const [score, setScore] = useState(0);
   const [currentDice, setCurrentDice] = useState(1);
   const [selectedNumber, setSelectedNumber] = useState();
   const [error, setError] =  useState("");
+  const [showRules, setShowRules] = useState(false);
 
 
   const generateRandomNumber = (min, max) => {
@@ -45,8 +47,10 @@ const GamePlay = () => {
       <RoleDice currentDice={currentDice} roleDice={roleDice} />
       <div className='btns'>
         <OutlineButton onClick={resetScore}>Reset Score</OutlineButton>
-        <Button>Show Rules</Button>
+        <Button onClick={() => setShowRules(prev => !prev)}>{showRules ? "Hide" : "Show"} Rules</Button>
       </div>
+
+      {showRules && <Rules />}
     </MainContainer>
   )
 }
